@@ -15,6 +15,10 @@ import org.greenrobot.eventbus.Subscribe;
 
 public class MainActivity extends AppCompatActivity {
 
+  private int timeInterval = 3000;
+  private int fastestTimeInterval = 3000;
+  private boolean runAsBackgroundService = false;
+
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -31,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         //(i.e. another app is using the location services).
         //runAsBackgroundService = True (Service will run in Background and updates Frequently(according to the timeInterval and fastestTimeInterval))
         //runAsBackgroundService = False (Service will getDestroyed after a successful location update )
-        new EasyLocationInit(MainActivity.this, 3000, 3000,false);
+        new EasyLocationInit(MainActivity.this, timeInterval, fastestTimeInterval, runAsBackgroundService);
       }
     });
   }
