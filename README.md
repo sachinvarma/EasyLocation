@@ -39,7 +39,31 @@ fastestTimeInterval -> setFastestInterval(long)(inMilliSeconds) means - if a loc
 runAsBackgroundService = True (Service will run in Background and updates Frequently(according to the timeInterval and fastestTimeInterval))
 runAsBackgroundService = False (Service will getDestroyed after a successful location update )
 
-2) Location will be received in
+2) Prepare subscribers: Declare and annotate your subscribing method, optionally specify a thread mode:
+
+```
+@Subscribe(threadMode = ThreadMode.MAIN)  
+public void getEvent(Event event) {/* Do something */};
+```
+
+Register and unregister your subscriber. For example on Android, activities and fragments should usually register according to their life cycle:
+
+```
+ @Override
+ public void onStart() {
+     super.onStart();
+     EventBus.getDefault().register(this);
+ }
+
+ @Override
+ public void onStop() {
+     super.onStop();
+     EventBus.getDefault().unregister(this);
+ }
+ 
+ ```
+
+3) Location will be received in
 
 ```
 @SuppressLint("SetTextI18n")
@@ -56,6 +80,10 @@ runAsBackgroundService = False (Service will getDestroyed after a successful loc
     }
   }
 ```
+
+For more Details - > 
+
+https://github.com/sachinvarma/EasyLocation/blob/master/app/src/main/java/com/sachinvarma/easylocationsample/MainActivity.java
 
 **LICENSE**
 ```
