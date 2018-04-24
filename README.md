@@ -39,7 +39,7 @@ fastestTimeInterval -> setFastestInterval(long)(inMilliSeconds) means - if a loc
 runAsBackgroundService = True (Service will run in Background and updates Frequently(according to the timeInterval and fastestTimeInterval))
 runAsBackgroundService = False (Service will getDestroyed after a successful location update )
 
-2)Location will be received in
+2) Location will be received in
 
 ```
 @SuppressLint("SetTextI18n")
