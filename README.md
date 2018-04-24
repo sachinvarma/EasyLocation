@@ -48,7 +48,7 @@ Via Maven:
 
 **runAsBackgroundService** = False (Service will getDestroyed after a successful location update )
 
-2) Prepare subscribers: Declare and annotate your subscribing method, optionally specify a thread mode:
+2) Prepare EventBus subscribers: Declare and annotate your subscribing method, optionally specify a thread mode:
 
 ```
 @Subscribe(threadMode = ThreadMode.MAIN)  
