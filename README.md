@@ -30,9 +30,8 @@ Via Maven:
 
 1) Just call
 
- ```new EasyLocationInit(MainActivity.this, 3000, 3000,false);```
+ ```new EasyLocationInit(MainActivity.this, timeInterval, fastestTimeInterval, runAsBackgroundService);```
  
- new EasyLocationInit(context, timeInterval , fastestTimeInterval, runAsBackgroundService);
  
 timeInterval -> setInterval(long)(inMilliSeconds) means - set the interval in which you want to get locations.
 fastestTimeInterval -> setFastestInterval(long)(inMilliSeconds) means - if a location is available sooner you can get it.
@@ -40,45 +39,10 @@ fastestTimeInterval -> setFastestInterval(long)(inMilliSeconds) means - if a loc
 runAsBackgroundService = True (Service will run in Background and updates Frequently(according to the timeInterval and fastestTimeInterval))
 runAsBackgroundService = False (Service will getDestroyed after a successful location update )
 
-For Example:
+2)Location will be received in
 
 ```
-public class MainActivity extends AppCompatActivity {
-
-  @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-
-    findViewById(R.id.btGetLocation).setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-
-        // new EasyLocationInit(context, timeInterval , fastestTimeInterval, runAsBackgroundService);
-
-        //timeInterval -> setInterval(long)(inMilliSeconds) means - set the interval in which you want to get locations.
-        //fastestTimeInterval -> setFastestInterval(long)(inMilliSeconds) means - if a location is available sooner you can get it.
-        //(i.e. another app is using the location services).
-        //runAsBackgroundService = True (Service will run in Background and updates Frequently(according to the timeInterval and        fastestTimeInterval))
-        //runAsBackgroundService = False (Service will getDestroyed after a successful location update )
-        new EasyLocationInit(MainActivity.this, 3000, 3000,false);
-      }
-    });
-  }
-
-  @Override
-  protected void onStart() {
-    super.onStart();
-    EventBus.getDefault().register(this);
-  }
-
-  @Override
-  protected void onStop() {
-    super.onStop();
-    EventBus.getDefault().unregister(this);
-  }
-
-  @SuppressLint("SetTextI18n")
+@SuppressLint("SetTextI18n")
   @Subscribe
   public void getEvent(final Event event) {
 
@@ -91,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
       }
     }
   }
-}
-
 ```
 
 **LICENSE**
