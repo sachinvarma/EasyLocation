@@ -23,6 +23,13 @@ Via Maven:
  <artifactId>EasyLocation</artifactId>
  <version>1.0.0</version>
 </dependency> 
+
+<dependency>
+    <groupId>org.greenrobot</groupId>
+    <artifactId>eventbus</artifactId>
+    <version>3.1.1</version>
+</dependency>
+
 ```
 
 
