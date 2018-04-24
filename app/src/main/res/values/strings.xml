@@ -1,0 +1,5 @@
+<resources>
+  <string name="app_name">EasyLocation</string>
+  <string name="get_location">Get Location</string>
+  <string name="no_location_found">No Location Found</string>
+</resources>
