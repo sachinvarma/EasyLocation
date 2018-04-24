@@ -33,6 +33,7 @@ Via Maven:
  ```new EasyLocationInit(MainActivity.this, 3000, 3000,false);```
  
  new EasyLocationInit(context, timeInterval , fastestTimeInterval, runAsBackgroundService);
+ 
 timeInterval -> setInterval(long)(inMilliSeconds) means - set the interval in which you want to get locations.
 fastestTimeInterval -> setFastestInterval(long)(inMilliSeconds) means - if a location is available sooner you can get it.
 (i.e. another app is using the location services).
@@ -53,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
 
-        // new EasyLocationInit(context, timeInterval , fastestTimeInterval, runAsBackgroundService);\n
+        // new EasyLocationInit(context, timeInterval , fastestTimeInterval, runAsBackgroundService);
 
         //timeInterval -> setInterval(long)(inMilliSeconds) means - set the interval in which you want to get locations.
         //fastestTimeInterval -> setFastestInterval(long)(inMilliSeconds) means - if a location is available sooner you can get it.
         //(i.e. another app is using the location services).
-        //runAsBackgroundService = True (Service will run in Background and updates Frequently(according to the timeInterval and fastestTimeInterval))
+        //runAsBackgroundService = True (Service will run in Background and updates Frequently(according to the timeInterval and        fastestTimeInterval))
         //runAsBackgroundService = False (Service will getDestroyed after a successful location update )
         new EasyLocationInit(MainActivity.this, 3000, 3000,false);
       }
