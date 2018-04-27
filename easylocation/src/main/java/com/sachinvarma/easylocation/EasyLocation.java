@@ -321,4 +321,5 @@ public class EasyLocation extends Activity
     super.onStop();
     Log.d(TAG, "On Stop");
   }
+
 }
