@@ -1,6 +1,8 @@
 # EasyLocation
 A simple Library which will help you to get Location in a single Button click.
 
+![](https://github.com/sachinvarma/EasyLocation/blob/master/Art/demo.gif)
+
 **How to Add :**
 
 Via Gradle:
