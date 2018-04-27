@@ -23,6 +23,13 @@ Via Maven:
  <artifactId>EasyLocation</artifactId>
  <version>1.0.0</version>
 </dependency> 
+
+<dependency>
+    <groupId>org.greenrobot</groupId>
+    <artifactId>eventbus</artifactId>
+    <version>3.1.1</version>
+</dependency>
+
 ```
 
 
@@ -30,55 +37,45 @@ Via Maven:
 
 1) Just call
 
- ```new EasyLocationInit(MainActivity.this, 3000, 3000,false);```
+ ```new EasyLocationInit(MainActivity.this, timeInterval, fastestTimeInterval, runAsBackgroundService);```
  
- new EasyLocationInit(context, timeInterval , fastestTimeInterval, runAsBackgroundService);
  
-timeInterval -> setInterval(long)(inMilliSeconds) means - set the interval in which you want to get locations.
-fastestTimeInterval -> setFastestInterval(long)(inMilliSeconds) means - if a location is available sooner you can get it.
+**timeInterval** -> setInterval(long)(inMilliSeconds) means - set the interval in which you want to get locations.
+**fastestTimeInterval** -> setFastestInterval(long)(inMilliSeconds) means - if a location is available sooner you can get it.
 (i.e. another app is using the location services).
-runAsBackgroundService = True (Service will run in Background and updates Frequently(according to the timeInterval and fastestTimeInterval))
-runAsBackgroundService = False (Service will getDestroyed after a successful location update )
 
-For Example:
+**runAsBackgroundService** = True (Service will run in Background and updates Frequently(according to the timeInterval and fastestTimeInterval))
+
+**runAsBackgroundService** = False (Service will getDestroyed after a successful location update )
+
+2) Prepare EventBus subscribers: Declare and annotate your subscribing method, optionally specify a thread mode:
 
 ```
-public class MainActivity extends AppCompatActivity {
+@Subscribe(threadMode = ThreadMode.MAIN)  
+public void getEvent(Event event) {/* Do something */};
+```
 
-  @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+Register and unregister your subscriber. For example on Android, activities and fragments should usually register according to their life cycle:
 
-    findViewById(R.id.btGetLocation).setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
+```
+ @Override
+ public void onStart() {
+     super.onStart();
+     EventBus.getDefault().register(this);
+ }
 
-        // new EasyLocationInit(context, timeInterval , fastestTimeInterval, runAsBackgroundService);
+ @Override
+ public void onStop() {
+     super.onStop();
+     EventBus.getDefault().unregister(this);
+ }
+ 
+ ```
 
-        //timeInterval -> setInterval(long)(inMilliSeconds) means - set the interval in which you want to get locations.
-        //fastestTimeInterval -> setFastestInterval(long)(inMilliSeconds) means - if a location is available sooner you can get it.
-        //(i.e. another app is using the location services).
-        //runAsBackgroundService = True (Service will run in Background and updates Frequently(according to the timeInterval and        fastestTimeInterval))
-        //runAsBackgroundService = False (Service will getDestroyed after a successful location update )
-        new EasyLocationInit(MainActivity.this, 3000, 3000,false);
-      }
-    });
-  }
+3) Location will be received in
 
-  @Override
-  protected void onStart() {
-    super.onStart();
-    EventBus.getDefault().register(this);
-  }
-
-  @Override
-  protected void onStop() {
-    super.onStop();
-    EventBus.getDefault().unregister(this);
-  }
-
-  @SuppressLint("SetTextI18n")
+```
+@SuppressLint("SetTextI18n")
   @Subscribe
   public void getEvent(final Event event) {
 
@@ -91,9 +88,11 @@ public class MainActivity extends AppCompatActivity {
       }
     }
   }
-}
-
 ```
+
+For more Details - > 
+
+https://github.com/sachinvarma/EasyLocation/blob/master/app/src/main/java/com/sachinvarma/easylocationsample/MainActivity.java
 
 **LICENSE**
 ```
